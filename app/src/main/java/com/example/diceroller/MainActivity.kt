@@ -2,18 +2,29 @@ package com.example.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.NumberPicker
 import android.widget.Toast
+
+// add logging function
+private const val TAG = "MainActivity"
+fun logging() {
+    Log.v(TAG, "Hello, world!")
+}
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // invoke logging function
+        logging()
 
         val rollButton: Button = findViewById(R.id.button)
         rollButton.setOnClickListener { rollDice() }
+
     }
 
     // write function for roll dice
@@ -37,7 +48,17 @@ class MainActivity : AppCompatActivity() {
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
         }
+
         diceImage.setImageResource(drawableResource)
+
+        val luckyNumber: TextView = findViewById(R.id.textView3)
+        val resultText: TextView = findViewById(R.id.resultTextView)
+
+        when (luckyNumber.text) {
+            resultNumber.toString() -> resultText.text = "Lucky number is ${luckyNumber.text} \nYour dice roll is lucky!"
+            else -> resultText.text = "Lucky number is ${luckyNumber.text} \nTry again!"
+        }
+
 
     }
 }
